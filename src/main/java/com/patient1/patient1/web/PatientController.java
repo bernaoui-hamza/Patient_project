@@ -4,12 +4,15 @@ import com.patient1.patient1.entities.Patient;
 import com.patient1.patient1.repositories.PatientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+
+import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
@@ -44,18 +47,16 @@ public class PatientController {
 
     @GetMapping(path = "/formPatients")
     public String formPatients(Model model) {
-Patient p2=new Patient();
-p2.setNom("ali");
-p2.setScore(30);
-p2.setMalade(true);
-        model.addAttribute("p1", p2);
+
+        model.addAttribute("p1", new Patient());
         String s = "formulairePatient";
         return s;
     }
     @PostMapping(path = "/save")
-    public String save(Model model,Patient patient){
+    public String save(Model model, @Valid Patient patient, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) return  "redirect:/formulairePatient";
         patientRepository.save(patient);
-        return "redirect:/index";
+        return "redirect:/formulairePatient";
     }
 
 }

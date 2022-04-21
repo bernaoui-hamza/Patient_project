@@ -17,14 +17,14 @@
                 <label>Nom1</label>
 
                 <input class="form-control" type="text" th:field="*{nom}"/>
-
+                <span th:errors="${p1.nom}"></span>
 
             </div>
             <div>
                 <label>Date naissance</label>
 
                 <input class="form-control" type="date" th:field="*{dateNaissance}"/>
-
+                <span th:errors="${p1.dateNaissance}"></span>
 
             </div>
             <div>
@@ -38,7 +38,7 @@
                 <label>Score</label>
 
                 <input class="form-control" type="text" th:field="*{score}"/>
-
+                <span th:errors="${p1.score}"></span>
 
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
