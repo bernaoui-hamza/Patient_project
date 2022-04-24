@@ -20,7 +20,7 @@ import java.util.Date;
 public class PatientController {
     private PatientRepository patientRepository;
 
-    @GetMapping(path = "/index")
+    @GetMapping(path = "/user/index")
     public String patients(Model model,
                            @RequestParam(name = "page", defaultValue = "0") int page,
                            @RequestParam(name = "size", defaultValue = "5") int size,
@@ -35,18 +35,18 @@ public class PatientController {
         return "patients";
     }
 
-    @GetMapping(path = "/delete")
+    @GetMapping(path = "/admin/delete")
     public String delete(Long id, String keyword, int page) {
         patientRepository.deleteById(id);
-        return "redirect:/index?page=" + page + "&keyword=" + keyword;
+        return "redirect:/user/index?page=" + page + "&keyword=" + keyword;
     }
 
     @GetMapping(path = "/")
     public String home() {
-        return "redirect:/index";
+        return "home";
     }
 
-    @GetMapping(path = "/formPatients")
+    @GetMapping(path = "/admin/formPatients")
     public String formPatients(Model model) {
 
         model.addAttribute("p1", new Patient());
@@ -54,13 +54,13 @@ public class PatientController {
         return s;
     }
 
-    @PostMapping(path = "/save")
+    @PostMapping(path = "/admin/save")
     public String save(Model model,  Patient patient){
         //if(bindingResult.hasErrors()) return  "redirect:/index";
         patientRepository.save(patient);
-        return "redirect:/index";
+        return "redirect:/user/index";
     }
-    @GetMapping(path = "/editePatient")
+    @GetMapping(path = "/admin/editePatient")
     public String editePatient(Model model,Long id) {
         Patient p1=patientRepository.findById(id).orElse(null);
         if (p1==null)throw new RuntimeException("Patient Introuvable");
