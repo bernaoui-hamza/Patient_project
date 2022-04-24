@@ -14,17 +14,24 @@
     <div class="col-md-6 offset-3">
         <form method="post" th:action="@{save}" th:object="${p1}">
             <div>
+                <label>id</label>
+
+                <input class="form-control" type="text" th:field="*{id}"/>
+                <!--  <span th:errors="${p1.nom}"></span>-->
+
+            </div>
+            <div>
                 <label>Nom1</label>
 
                 <input class="form-control" type="text" th:field="*{nom}"/>
-              <!--  <span th:errors="${p1.nom}"></span>-->
+                <!--  <span th:errors="${p1.nom}"></span>-->
 
             </div>
             <div>
                 <label>Date naissance</label>
 
                 <input class="form-control" type="date" th:field="*{dateNaissance}"/>
-               <!-- <span th:errors="${p1.dateNaissance}"></span>-->
+                <!-- <span th:errors="${p1.dateNaissance}"></span>-->
 
             </div>
             <div>

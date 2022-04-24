@@ -17,14 +17,14 @@ import java.util.Date;
 public class Patient {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
-    @Size(min = 4, max = 40)
+   /* @NotEmpty*/
+    /*@Size(min = 4, max = 40)*/
     private String nom;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateNaissance;
     private boolean malade;
-    @DecimalMin("100")
+    /*@DecimalMin("100")*/
     private int score;
 
 

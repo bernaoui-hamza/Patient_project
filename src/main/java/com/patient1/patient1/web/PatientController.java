@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 @Controller
 @AllArgsConstructor
@@ -52,11 +53,30 @@ public class PatientController {
         String s = "formulairePatient";
         return s;
     }
-    @PostMapping(path = "/save")
-    public String save(Model model, @Valid Patient patient, BindingResult bindingResult){
-        if(bindingResult.hasErrors()) return  "redirect:/formulairePatient";
-        patientRepository.save(patient);
-        return "redirect:/formulairePatient";
-    }
 
+    @PostMapping(path = "/save")
+    public String save(Model model,  Patient patient){
+        //if(bindingResult.hasErrors()) return  "redirect:/index";
+        patientRepository.save(patient);
+        return "redirect:/index";
+    }
+    @GetMapping(path = "/editePatient")
+    public String editePatient(Model model,Long id) {
+        Patient p1=patientRepository.findById(id).orElse(null);
+        if (p1==null)throw new RuntimeException("Patient Introuvable");
+         model.addAttribute("p1", p1);
+
+        return "editPatient";
+    }
+    /*@PostMapping(path = "/editer")
+    public String editer(Model model,Patient patient){
+        String n=model.getAttribute("nom").toString();
+        String dtN=model.getAttribute("dateNaissance").toString();
+        Date dt=new Date(dtN);
+        String sc=model.getAttribute("score").toString();
+        boolean malade= (boolean) model.getAttribute("malade");
+
+        return "";
+    }
+*/
 }
