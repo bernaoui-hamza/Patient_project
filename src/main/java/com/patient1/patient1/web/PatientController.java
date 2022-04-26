@@ -4,16 +4,12 @@ import com.patient1.patient1.entities.Patient;
 import com.patient1.patient1.repositories.PatientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
-import javax.validation.Valid;
-import java.util.Date;
 
 @Controller
 @AllArgsConstructor
@@ -34,6 +30,7 @@ public class PatientController {
 
         return "patients";
     }
+
 
     @GetMapping(path = "/admin/delete")
     public String delete(Long id, String keyword, int page) {

@@ -17,22 +17,12 @@
     <div class="container mt-2">
         <div class="card">
 
-            <!--<div th:if="${ajouter}">
-                <div class="alert alert-success" role="alert">
-                    This is a success alert—check it out!
-                </div>
-            </div>
-            &lt;!&ndash; ELSE &ndash;&gt;
-            <div th:unless="${ajouter}">
-                <div class="alert alert-success" role="alert" th:text="${ajouter}">
 
-                </div>
-            </div>-->
             <div class="card-header">
-                Liste des Patients
+                Liste des Medecins
             </div>
             <div class="card-body">
-                <form method="get" th:action="@{/user/index}">
+                <form method="get" th:action="@{/admin/index2}">
                     <input type="text" name="keyword" th:value="${keyword}">
                     <button type="submit" class="btn btn-primary">chercher</button>
                 </form>
@@ -42,8 +32,8 @@
                         <th>ID</th>
                         <th>Nom</th>
                         <th>Date</th>
-                        <th>Malade</th>
-                        <th>Score</th>
+                        <th>Ville</th>
+                        <th>Specialite</th>
                     </tr>
 
 
@@ -51,19 +41,20 @@
 
 
                     <tbody>
-                    <tr th:each="p:${ListPatients}">
-                        <td th:text="${p.id}"></td>
-                        <td th:text="${p.nom}"></td>
-                        <td th:text="${p.dateNaissance}"></td>
-                        <td th:text="${p.malade}"></td>
-                        <td th:text="${p.score}"></td>
+
+                    <tr th:each="m:${ListMedecins}">
+                        <td th:text="${m.id}"></td>
+                        <td th:text="${m.nomMedecin}"></td>
+                        <td th:text="${m.dateNaissance}"></td>
+                        <td th:text="${m.adresse}"></td>
+                        <td th:text="${m.specialite}"></td>
                         <td sec:authorize="hasAuthority('ADMIN')">
                             <a class="btn btn-danger"
-                               th:href="@{/admin/delete(id=${p.id},keyword=${keyword},page=${currentPage})}">Delete</a>
+                               th:href="@{/admin/delete2(id=${m.id},keyword=${keyword},page=${currentPage})}">Delete</a>
                         </td>
                         <td sec:authorize="hasAuthority('ADMIN')">
                             <a class="btn btn-success"
-                               th:href="@{/admin/editePatient(id=${p.id})}">Edite</a>
+                               href="#">Edite</a>
                         </td>
                     </tr>
                     </tbody>
@@ -77,7 +68,7 @@
         <li th:each="page,status:${pages}">
             <a th:class="${status.index==currentPage?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
                th:text="${status.index}"
-               th:href="@{/user/index(page=${status.index},keyword=${keyword})}"
+               th:href="@{/admin/index2(page=${status.index},keyword=${keyword})}"
             />
 
         </li>

@@ -1,6 +1,8 @@
 package com.patient1.patient1;
 
+import com.patient1.patient1.entities.Medecin;
 import com.patient1.patient1.entities.Patient;
+import com.patient1.patient1.repositories.MedicinRepository;
 import com.patient1.patient1.repositories.PatientRepository;
 import com.patient1.patient1.sec.service.SecurityService;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +20,23 @@ public class Patient1Application {
     public static void main(String[] args) {
 
         SpringApplication.run(Patient1Application.class, args);
+    }
+
+//@Bean
+    CommandLineRunner commandeMedecin(MedicinRepository medecinRepository) {
+        return args -> {
+           medecinRepository.save(
+                    new Medecin(null, "Benjloun",new Date(),"orthophoniste","casablanca"));
+            medecinRepository.save(
+                    new Medecin(null, "hassan",new Date(),"pediatre","sale"));
+            medecinRepository.save(
+                    new Medecin(null, "Bernaoui",new Date(),"cardiologue","casablanca"));
+            medecinRepository.save(
+                    new Medecin(null, "bekkali",new Date(),"auphtalmologue","Rabat"));
+            medecinRepository.findAll().forEach(m -> {
+                System.out.println(m.getNomMedecin());
+            });
+        };
     }
 
     //@Bean
